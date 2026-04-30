@@ -3,115 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeFi Onchain | Next Gen Trading</title>
+    <title>DeFi Onchain | Secure Crypto Terminal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { 
-            background-color: #0a101d; 
-            color: #ffffff; 
-            font-family: 'Inter', sans-serif; 
-            margin: 0;
-            padding-bottom: 80px; /* Space for bottom buttons */
-        }
-        .crypto-card { background: #121926; border-radius: 12px; }
-        .text-green { color: #00d395; }
-        .text-red { color: #ff4d6d; }
-        .nav-pill { background: #1a2333; border-radius: 20px; padding: 6px 16px; font-size: 14px; }
-        .nav-pill.active { background: #1e40af; border: 1px solid #3b82f6; }
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #0a101d; padding: 15px; display: flex; gap: 12px; border-top: 1px solid #1e293b; }
-        .btn-swap { background: #0082ff; border-radius: 10px; flex: 1; padding: 12px; font-weight: bold; text-align: center; }
-        .btn-buy { background: #0082ff; border-radius: 10px; flex: 1; padding: 12px; font-weight: bold; text-align: center; }
+        body { background-color: #060b13; color: #ffffff; font-family: 'Inter', sans-serif; }
+        .tab-active { color: #58a6ff; border-bottom: 2px solid #58a6ff; }
+        .token-card:active { background-color: #161b22; }
+        .action-button { background-color: #1193f4; }
+        .chart-container { background-color: #0b1421; border-radius: 12px; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); }
     </style>
 </head>
-<body>
+<body class="max-w-md mx-auto min-h-screen flex flex-col border-x border-gray-800">
 
-    <!-- Header -->
-    <header class="flex items-center justify-between p-4 bg-[#0a101d] sticky top-0 z-50">
+    <!-- HEADER SECTION -->
+    <header class="p-4 flex items-center justify-between sticky top-0 bg-[#060b13] z-50">
         <div class="flex items-center space-x-2">
-            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center font-bold text-white text-xs">D</div>
-            <span class="text-lg font-bold tracking-tight text-white uppercase">DeFi Onchain</span>
+            <img src="https://cryptologos.cc/logos/cronos-cro-logo.png" class="w-6 h-6" alt="Logo">
+            <span class="font-bold tracking-wider text-sm uppercase">DeFi Onchain</span>
         </div>
         <div class="flex items-center space-x-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-            <button class="bg-[#1e293b] text-blue-400 px-4 py-1.5 rounded-full text-sm font-semibold">Log In</button>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            <button class="bg-[#102a43] text-[#58a6ff] px-4 py-1.5 rounded-full text-xs font-bold">Log In</button>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
         </div>
     </header>
 
-    <!-- Filter Navigation -->
-    <div class="flex space-x-3 overflow-x-auto px-4 py-2 no-scrollbar">
-        <div class="nav-pill active">Hot</div>
-        <div class="nav-pill">Top</div>
-        <div class="nav-pill">New</div>
-        <div class="nav-pill">Gainers</div>
-        <div class="nav-pill">Losers</div>
-    </div>
-
-    <!-- BTC Detail Section -->
-    <div class="p-4">
+    <!-- TRADING VIEW DETAIL SECTION (Image 2 style) -->
+    <div class="px-4 py-2">
         <div class="flex items-center space-x-3 mb-2">
-            <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" width="32" alt="BTC">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+            <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" class="w-8 h-8" alt="BTC">
             <div>
-                <div class="font-bold">BTC</div>
-                <div class="text-xs text-gray-500">Bitcoin</div>
+                <h1 class="font-bold text-lg leading-tight">BTC</h1>
+                <p class="text-xs text-gray-500">Bitcoin</p>
             </div>
-        </div>
-        
-        <div class="flex justify-between items-end mb-4">
-            <h1 class="text-3xl font-bold">$76,308.00</h1>
-            <span class="text-red font-semibold">-0.27%</span>
         </div>
 
-        <!-- Real-time Chart Container -->
-        <div class="crypto-card p-2 mb-6 h-[350px]">
-            <div id="tradingview_widget" class="h-full w-full"></div>
+        <div class="flex justify-between items-end mb-6">
+            <div class="text-3xl font-bold font-mono">$76,308.00</div>
+            <div class="text-red-500 font-semibold mb-1">-0.27%</div>
         </div>
 
-        <!-- Token Info Grid -->
-        <div class="grid grid-cols-2 gap-4 mb-6">
+        <!-- CHART AREA -->
+        <div class="chart-container h-64 w-full p-2 mb-6">
+            <!-- TradingView Widget Implementation -->
+            <div id="tradingview_onchain" class="h-full"></div>
+        </div>
+
+        <!-- TABS SECTION -->
+        <div class="flex space-x-6 border-b border-gray-800 text-sm font-medium text-gray-500 mb-6">
+            <button class="pb-2 tab-active">Token Info</button>
+            <button class="pb-2">Security</button>
+            <button class="pb-2">Feed</button>
+            <button class="pb-2">History</button>
+        </div>
+
+        <!-- MARKET DATA GRID -->
+        <div class="grid grid-cols-2 gap-y-6 gap-x-4 mb-24">
             <div>
-                <div class="text-xs text-gray-500">Market Cap</div>
-                <div class="font-semibold">$1.52T <span class="text-red text-[10px]">-0.30%</span></div>
-                <span class="bg-yellow-600/20 text-yellow-500 text-[10px] px-1 rounded">No.1</span>
+                <p class="text-[10px] text-gray-500 uppercase tracking-widest">Market Cap</p>
+                <p class="font-semibold text-sm">$1.52T <span class="text-red-500 text-xs">-0.30%</span></p>
+                <span class="bg-yellow-900 text-yellow-500 text-[10px] px-1.5 rounded">No.1</span>
             </div>
             <div>
-                <div class="text-xs text-gray-500">All-Time High</div>
-                <div class="font-semibold">$126,080.00 <span class="text-red text-[10px]">-39.48%</span></div>
+                <p class="text-[10px] text-gray-500 uppercase tracking-widest">All-Time High</p>
+                <p class="font-semibold text-sm">$126,080.00 <span class="text-red-500 text-xs">-39.48%</span></p>
             </div>
             <div>
-                <div class="text-xs text-gray-500">All-Time Low</div>
-                <div class="font-semibold">$67.81 <span class="text-green text-[10px]">+112434.33%</span></div>
+                <p class="text-[10px] text-gray-500 uppercase tracking-widest">All-Time Low</p>
+                <p class="font-semibold text-sm">$67.81 <span class="text-green-500 text-xs">+112434.33%</span></p>
             </div>
             <div>
-                <div class="text-xs text-gray-500">24h Volume</div>
-                <div class="font-semibold">$43.06B</div>
+                <p class="text-[10px] text-gray-500 uppercase tracking-widest">24h Volume</p>
+                <p class="font-semibold text-sm">$43.06B</p>
             </div>
         </div>
     </div>
 
-    <!-- Bottom Action Bar -->
-    <div class="bottom-nav">
-        <div class="btn-swap">Swap</div>
-        <div class="btn-buy">Buy</div>
+    <!-- BOTTOM ACTION BUTTONS -->
+    <div class="fixed bottom-0 max-w-md w-full p-4 flex space-x-3 bg-[#060b13] border-t border-gray-900">
+        <button class="flex-1 action-button py-3.5 rounded-xl font-bold text-sm">Swap</button>
+        <button class="flex-1 action-button py-3.5 rounded-xl font-bold text-sm">Buy</button>
     </div>
 
-    <!-- TradingView Script -->
+    <!-- TRADINGVIEW SCRIPT -->
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <script type="text/javascript">
         new TradingView.widget({
             "autosize": true,
             "symbol": "BINANCE:BTCUSDT",
-            "interval": "H",
+            "interval": "60",
             "timezone": "Etc/UTC",
             "theme": "dark",
             "style": "1",
             "locale": "en",
             "enable_publishing": false,
             "hide_top_toolbar": true,
-            "hide_legend": true,
             "save_image": false,
-            "container_id": "tradingview_widget"
+            "container_id": "tradingview_onchain"
         });
     </script>
 </body>
