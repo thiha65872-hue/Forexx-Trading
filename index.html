@@ -1,99 +1,146 @@
-<!DOCTYPE index.html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProForex | Future Trading Terminal</title>
+    <title>CryptoPro | Institutional Trading Terminal</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #0b0e11; color: #eaecef; font-family: 'Inter', sans-serif; }
-        .glass-panel { background: rgba(30, 32, 38, 0.7); border: 1px solid #2b3139; }
-        .trade-button-buy { background-color: #2ebd85; }
-        .trade-button-sell { background-color: #f6465d; }
+        body { background-color: #05070a; color: #f0f2f5; font-family: 'Inter', sans-serif; overflow: hidden; }
+        .border-panel { border: 1px solid #1e2329; }
+        .bg-card { background-color: #12161c; }
+        .text-buy { color: #00c087; }
+        .text-sell { color: #f84960; }
+        .bg-buy { background-color: #00c087; }
+        .bg-sell { background-color: #f84960; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #2b3139; }
     </style>
 </head>
-<body>
+<body class="h-screen flex flex-col">
 
-    <!-- Navigation Bar -->
-    <nav class="flex items-center justify-between px-6 py-4 border-b border-gray-800 glass-panel">
-        <div class="text-2xl font-bold text-yellow-500">PRO-FOREX</div>
-        <div class="hidden md:flex space-x-6 uppercase text-sm font-medium">
-            <a href="#" class="hover:text-yellow-500">Market</a>
-            <a href="#" class="hover:text-yellow-500">Trade</a>
-            <a href="#" class="hover:text-yellow-500">Futures</a>
-            <a href="#" class="hover:text-yellow-500">Wallet</a>
+    <!-- TOP NAVIGATION (MetaMask & Crypto.com Style) -->
+    <nav class="h-14 flex items-center justify-between px-4 border-b border-panel bg-card">
+        <div class="flex items-center space-x-8">
+            <div class="text-xl font-bold text-blue-500 tracking-tighter">CRYPTO<span class="text-white">.COM</span></div>
+            <div class="hidden lg:flex space-x-6 text-sm font-medium text-gray-400">
+                <a href="#" class="hover:text-white">Markets</a>
+                <a href="#" class="hover:text-white text-blue-400">Trade</a>
+                <a href="#" class="hover:text-white">Derivatives</a>
+                <a href="#" class="hover:text-white">NFT</a>
+            </div>
         </div>
-        <button class="bg-yellow-500 text-black px-4 py-2 rounded font-bold hover:bg-yellow-400">Connect Wallet</button>
+        <div class="flex items-center space-x-4">
+            <div class="text-right hidden sm:block">
+                <div class="text-xs text-gray-500">Total Balance</div>
+                <div class="text-sm font-bold text-green-400">$42,580.12</div>
+            </div>
+            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-md text-sm font-bold transition">
+                Connect Wallet
+            </button>
+        </div>
     </nav>
 
-    <!-- Main Dashboard Container -->
-    <main class="grid grid-cols-12 gap-2 p-2 h-[90vh]">
+    <!-- MAIN TERMINAL -->
+    <div class="flex-1 grid grid-cols-12 gap-1 p-1 overflow-hidden">
         
-        <!-- Left Sidebar: Market List -->
-        <section class="col-span-12 md:col-span-3 glass-panel p-4 rounded-lg overflow-hidden">
-            <h3 class="text-gray-400 mb-4 font-semibold">Market Pairs</h3>
-            <div class="space-y-4">
-                <div class="flex justify-between items-center p-2 hover:bg-gray-800 rounded cursor-pointer">
-                    <span>EUR / USD</span> <span class="text-green-500">1.0842 +0.12%</span>
+        <!-- LEFT: MARKET SELECTION -->
+        <aside class="col-span-2 bg-card border-panel rounded-sm flex flex-col">
+            <div class="p-3 border-b border-panel font-semibold text-sm">Markets</div>
+            <div class="flex-1 overflow-y-auto">
+                <div class="p-3 flex justify-between hover:bg-gray-800 cursor-pointer border-l-2 border-blue-500">
+                    <span class="text-xs font-bold text-white">BTC/USD</span>
+                    <span class="text-xs text-buy">68,432.1</span>
                 </div>
-                <div class="flex justify-between items-center p-2 hover:bg-gray-800 rounded cursor-pointer">
-                    <span>GBP / USD</span> <span class="text-red-500">1.2635 -0.05%</span>
+                <div class="p-3 flex justify-between hover:bg-gray-800 cursor-pointer">
+                    <span class="text-xs font-bold text-white">ETH/USD</span>
+                    <span class="text-xs text-buy">3,241.5</span>
                 </div>
-                <div class="flex justify-between items-center p-2 hover:bg-gray-800 rounded cursor-pointer">
-                    <span>USD / JPY</span> <span class="text-green-500">149.21 +0.45%</span>
+                <div class="p-3 flex justify-between hover:bg-gray-800 cursor-pointer">
+                    <span class="text-xs font-bold text-white">SOL/USD</span>
+                    <span class="text-xs text-sell">145.28</span>
                 </div>
             </div>
-        </section>
+        </aside>
 
-        <!-- Center: Trading View Chart -->
-        <section class="col-span-12 md:col-span-6 glass-panel rounded-lg relative overflow-hidden">
-            <!-- TradingView Widget BEGIN -->
-            <div class="tradingview-widget-container" style="height:100%;width:100%">
-                <div id="tradingview_chart" style="height:calc(100% - 32px);width:100%"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                <script type="text/javascript">
-                new TradingView.widget({
-                    "autosize": true,
-                    "symbol": "FX:EURUSD",
-                    "interval": "D",
-                    "timezone": "Etc/UTC",
-                    "theme": "dark",
-                    "style": "1",
-                    "locale": "en",
-                    "enable_publishing": false,
-                    "allow_symbol_change": true,
-                    "container_id": "tradingview_chart"
-                });
-                </script>
-            </div>
-            <!-- TradingView Widget END -->
-        </section>
-
-        <!-- Right: Execution Panel -->
-        <section class="col-span-12 md:col-span-3 glass-panel p-6 rounded-lg">
-            <div class="flex mb-6 border-b border-gray-700">
-                <button class="flex-1 pb-2 border-b-2 border-yellow-500">Spot</button>
-                <button class="flex-1 pb-2 text-gray-500">Futures</button>
-            </div>
-
-            <div class="space-y-4">
-                <div>
-                    <label class="text-xs text-gray-400">Price (USD)</label>
-                    <input type="text" class="w-full bg-gray-800 border border-gray-700 p-2 rounded mt-1" value="1.0842">
+        <!-- CENTER: CHART & ORDER BOOK -->
+        <main class="col-span-7 flex flex-col space-y-1">
+            <!-- LIVE CHART -->
+            <section class="flex-1 bg-card border-panel rounded-sm overflow-hidden">
+                <div id="tradingview_chart" class="h-full"></div>
+            </section>
+            
+            <!-- RECENT TRADES / ORDER BOOK -->
+            <section class="h-48 bg-card border-panel rounded-sm grid grid-cols-2 text-[10px]">
+                <div class="p-2 border-r border-panel">
+                    <div class="text-gray-500 mb-2 uppercase">Order Book (Bids)</div>
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-buy"><span>68,430.5</span><span>0.124</span></div>
+                        <div class="flex justify-between text-buy opacity-80"><span>68,428.2</span><span>1.500</span></div>
+                        <div class="flex justify-between text-buy opacity-60"><span>68,425.0</span><span>0.892</span></div>
+                    </div>
                 </div>
-                <div>
-                    <label class="text-xs text-gray-400">Amount</label>
-                    <input type="number" class="w-full bg-gray-800 border border-gray-700 p-2 rounded mt-1" placeholder="0.00">
+                <div class="p-2">
+                    <div class="text-gray-500 mb-2 uppercase">Order Book (Asks)</div>
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-sell"><span>68,435.1</span><span>0.052</span></div>
+                        <div class="flex justify-between text-sell opacity-80"><span>68,438.9</span><span>2.110</span></div>
+                        <div class="flex justify-between text-sell opacity-60"><span>68,440.0</span><span>0.435</span></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- RIGHT: EXECUTION & WALLET -->
+        <aside class="col-span-3 flex flex-col space-y-1">
+            <div class="flex-1 bg-card border-panel p-4 rounded-sm">
+                <div class="flex space-x-4 border-b border-panel mb-4">
+                    <button class="pb-2 border-b-2 border-blue-500 text-sm font-bold">Limit</button>
+                    <button class="pb-2 text-sm text-gray-500">Market</button>
                 </div>
                 
-                <div class="grid grid-cols-2 gap-4 pt-4">
-                    <button class="trade-button-buy py-3 rounded font-bold text-white uppercase">Buy / Long</button>
-                    <button class="trade-button-sell py-3 rounded font-bold text-white uppercase">Sell / Short</button>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="text-gray-500">Price</span>
+                            <span class="text-gray-400 font-mono">USD</span>
+                        </div>
+                        <input type="text" class="w-full bg-[#1e2329] border border-transparent focus:border-blue-500 p-2 rounded text-sm outline-none" value="68432.10">
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="text-gray-500">Amount</span>
+                            <span class="text-gray-400 font-mono">BTC</span>
+                        </div>
+                        <input type="number" class="w-full bg-[#1e2329] border border-transparent focus:border-blue-500 p-2 rounded text-sm outline-none" placeholder="0.00">
+                    </div>
+                    
+                    <div class="pt-4 space-y-3">
+                        <button class="w-full bg-buy hover:opacity-90 text-white py-3 rounded font-bold uppercase text-sm">Buy BTC</button>
+                        <button class="w-full bg-sell hover:opacity-90 text-white py-3 rounded font-bold uppercase text-sm">Sell BTC</button>
+                    </div>
                 </div>
             </div>
-        </section>
+        </aside>
+    </div>
 
-    </main>
-
+    <!-- TRADINGVIEW SCRIPT -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript">
+        new TradingView.widget({
+            "autosize": true,
+            "symbol": "BINANCE:BTCUSDT",
+            "interval": "30",
+            "timezone": "Etc/UTC",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+            "enable_publishing": false,
+            "hide_side_toolbar": false,
+            "allow_symbol_change": true,
+            "container_id": "tradingview_chart"
+        });
+    </script>
 </body>
 </html>
